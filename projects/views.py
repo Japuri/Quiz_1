@@ -4,3 +4,7 @@ from .models import Project
 def detail_view(request, id):
     project = get_object_or_404(Project, id=id)
     return render(request, 'detail.html', {'project': project})
+
+def project_detail(request, id):
+    project = get_object_or_404(Project, id=id)
+    return render(request, 'project_detail.html', {'project': project})

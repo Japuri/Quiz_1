@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+    <div class="card shadow-lg border-0 w-100" style="max-width: 720px; background-color: #21262d;">
+        <div class="card-body text-white">
+            <h2 class="card-title fw-bold mb-3">{{ project.name }}</h2>
+            <p class="card-text text-light mb-4">{{ project.description }}</p>
+
+            <div class="text-muted small mb-2">
+                <strong>Created at:</strong> {{ project.created_at|date:"F d, Y" }}<br>
+                <strong>Last updated:</strong> {{ project.updated_at|date:"F d, Y" }}
+            </div>
+
+            <a href="{% url 'home' %}" class="btn btn-outline-primary mt-3">← Back to Projects</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,26 +1,52 @@
-{% extends "base.html" %}
-{% block title %}Home | Jakob{% endblock %}
+{% extends 'base.html' %}
+{% load static %}
+
 {% block content %}
-
-<h1 class="mb-4">Welcome to My Portfolio</h1>
-<p>Here are some of the projects I've worked on:</p>
-
-<div class="row row-cols-1 row-cols-md-3 g-4">
-    {% for project in projects %}
-    <div class="col">
-        <div class="card h-100 shadow-sm">
-            <div class="card-body">
-                <h5 class="card-title">{{ project.name }}</h5>
-                <p class="card-text">{{ project.description|truncatewords:25 }}</p>
-            </div>
-            <div class="card-footer text-end">
-                <a href="{% url 'project_detail' project.id %}" class="btn btn-outline-primary btn-sm">View Project</a>
-            </div>
-        </div>
+<!-- Hero Banner -->
+<section class="py-5 text-white" style="background: linear-gradient(to right, #0d6efd, #6610f2);">
+    <div class="container text-center">
+        <h1 class="display-4 fw-bold">Welcome to My Portfolio</h1>
+        <p class="lead mt-3">
+            Hi, I'm Jakob — a passionate developer and aspiring DevOps engineer.
+        </p>
+        <a href="{% url 'about' %}" class="btn btn-light btn-lg mt-4">Learn More About Me</a>
     </div>
-    {% empty %}
-    <p>No projects available.</p>
-    {% endfor %}
-</div>
+</section>
 
+<!-- Projects Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-5 text-black-50">Featured Projects</h2>
+
+        {% if projects %}
+        <div class="row g-4">
+            {% for project in projects %}
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-semibold">{{ project.name }}</h5>
+                        <p class="card-text text-muted">{{ project.description|truncatewords:20 }}</p>
+                        <a href="{% url 'project_detail' project.id %}" class="btn btn-outline-primary mt-auto">View Project</a>
+                    </div>
+                    <div class="card-footer bg-white text-muted small">
+                        Added on {{ project.created_at|date:"F d, Y" }}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-center text-muted mt-4">No projects available yet.</p>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Call To Action -->
+<section class="py-5 text-center text-white" style="background-color: #343a40;">
+    <div class="container">
+        <h4 class="mb-3">Want to collaborate or connect?</h4>
+        <a href="{% url 'contact' %}" class="btn btn-outline-light btn-lg">Contact Me</a>
+
+    </div>
+</section>
 {% endblock %}
